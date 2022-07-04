@@ -1141,20 +1141,25 @@ function universal(lib)
     
     local ExampleSection = Exampletab.Section("Essential")
 
+
+    local toggleKey = 'Z'
+
+    local noFalling = false
+
     
     ExampleSection.Toggle("No Fall", function(a)
 
         noFall = a
 
-        print("NOFALL ON")
-        
+        a = print("NOFALL ON")
+
     end)
     
    ExampleSection.Toggle("Walk On Water", function(a)
         waterWalk = a
    end)
 
-   ExampleSection.Toggle("WalkSpeed", function (a)
+   ExampleSection.Toggle("WalkSpeed", function(a)
         walkSpeed = a
    end)
 
@@ -1167,6 +1172,23 @@ function universal(lib)
     end)
     
 end
+
+game:GetService("UserInputService").InputBegan:connect(function(a)
+    if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
+
+        noFalling = true
+        print("No Fall On")
+
+    end
+end)
+game:GetService("UserInputService").InputEnded:connect(function(a)
+    if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
+
+        noFalling = false
+        print("No Fall Off")
+
+    end
+end)
 
 
     local Main = library.new("Poto Hub")

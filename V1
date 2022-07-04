@@ -1143,7 +1143,11 @@ function universal(lib)
 
     
     ExampleSection.Toggle("No Fall", function(a)
+
         noFall = a
+
+        print("NOFALL ON")
+        
     end)
     
    ExampleSection.Toggle("Walk On Water", function(a)

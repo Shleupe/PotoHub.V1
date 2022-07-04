@@ -1140,6 +1140,8 @@ function universal(lib)
     local Exampletab = Example.SideTab("Player")
     
     local ExampleSection = Exampletab.Section("Essential")
+
+    local noFall = false
     
     ExampleSection.Toggle("No Fall", function(a)
 
@@ -1172,15 +1174,15 @@ local toggleKey = 'Z'
 local noFalling = false
 
 game:GetService("UserInputService").InputBegan:connect(function(a)
-    if (a.UserInputType == Enum.UserInputType[toggleKey]) or noFall then
+    if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
 
         noFalling = true
         print("No Fall On")
 
     end
 end)
-game:GetService("UserInputService").InputBegan:connect(function(a)
-    if noFalling == true and (a.UserInputType == Enum.UserInputType[toggleKey]) or noFall then
+game:GetService("UserInputService").InputEnded:connect(function(a)
+    if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
 
         noFalling = false
         print("No Fall Off")

@@ -1142,12 +1142,14 @@ function universal(lib)
     local ExampleSection = Exampletab.Section("Essential")
 
     local noFall = false
+
+    local toggleKey = 'Z'
+
+    local noFalling = false
     
     ExampleSection.Toggle("No Fall", function(a)
 
         noFall = a
-
-        a = print("NOFALL ON")
 
     end)
     
@@ -1169,27 +1171,20 @@ function universal(lib)
     
 end
 
-local toggleKey = 'Z'
-
-local noFalling = false
-
 game:GetService("UserInputService").InputBegan:connect(function(a)
     if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
 
         noFalling = true
         print("No Fall On")
 
-    end
-end)
-game:GetService("UserInputService").InputEnded:connect(function(a)
-    if (a.UserInputType == Enum.UserInputType[toggleKey]) and noFall then
+    elseif (a.UserInputType == Enum.UserInputType[toggleKey]) and noFalling == true then
 
-        noFalling = false
-        print("No Fall Off")
+        noFall = a
+
+        print("OFF")
 
     end
 end)
-
 
     local Main = library.new("Poto Hub")
     universal(Main)
